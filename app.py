@@ -13,7 +13,7 @@ api_key = st.sidebar.text_input("Enter your Gemini API Key:", type="password")
 
 if api_key:
     genai.configure(api_key=api_key)
-    model = genai.GenerativeModel('gemini-pro')
+    model = genai.GenerativeModel('gemini-1.5-flash')
 
     topic = st.selectbox("Select a Pediatric Topic:", 
                          ["Neonatology", "Respiratory", "GI", "Emergency", "Cardiology", "Growth & Development"])
