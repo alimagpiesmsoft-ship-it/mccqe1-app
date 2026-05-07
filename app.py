@@ -13,8 +13,8 @@ if api_key:
     try:
         genai.configure(api_key=api_key)
         
-        # استخدام النسخة الأكثر توافقاً مع جميع المناطق والإصدارات
-        model = genai.GenerativeModel('gemini-1.0-pro')
+        # محاولة تشغيل الموديل الأكثر استقراراً
+        model = genai.GenerativeModel('gemini-1.5-flash')
 
         topic = st.selectbox("Select a Pediatric Topic:", 
                              ["Neonatology", "Respiratory", "GI", "Emergency", "Cardiology", "Growth & Development"])
@@ -22,7 +22,8 @@ if api_key:
         if st.button("Generate New Question"):
             prompt = f"Act as an MCCQE1 examiner. Generate a high-yield clinical vignette question about Pediatric {topic}. Include 4 options (A, B, C, D), the correct answer, and a detailed rationale based on Canadian guidelines (CPS)."
             
-            with st.spinner("Generating your question..."):
+            with st.spinner("Generating..."):
+                # طلب المحتوى
                 response = model.generate_content(prompt)
                 st.session_state.question = response.text
 
@@ -32,5 +33,6 @@ if api_key:
             
     except Exception as e:
         st.error(f"Error: {e}")
+        st.info("Try to refresh the page or check if your API Key is valid.")
 else:
     st.info("Please enter your Gemini API Key in the sidebar to start.")
