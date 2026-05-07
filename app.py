@@ -13,8 +13,8 @@ if api_key:
     try:
         genai.configure(api_key=api_key)
         
-        # هذا الاسم هو الأكثر استقراراً حالياً (النسخة الأحدث والمستقرة)
-        model = genai.GenerativeModel('gemini-1.5-flash-latest')
+        # استخدام النسخة الأكثر توافقاً مع جميع المناطق والإصدارات
+        model = genai.GenerativeModel('gemini-1.0-pro')
 
         topic = st.selectbox("Select a Pediatric Topic:", 
                              ["Neonatology", "Respiratory", "GI", "Emergency", "Cardiology", "Growth & Development"])
@@ -31,7 +31,6 @@ if api_key:
             st.markdown(st.session_state.question)
             
     except Exception as e:
-        # إذا استمر الخطأ، سنعرض رسالة واضحة تخبرنا بالسبب
         st.error(f"Error: {e}")
 else:
     st.info("Please enter your Gemini API Key in the sidebar to start.")
